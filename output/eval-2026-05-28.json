@@ -3,84 +3,84 @@
     "item_id": "9cc5b75203b16d71",
     "clarity": 4,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 5,
+    "notes": "Clear, concrete examples (onboarding docs, PR reviews, QA automation) make it tangible and valuable. Only minor issue: 'vibe coding' and 'agent frustration' remain slightly vague, but context supports understanding. Perfect length."
   },
   {
     "item_id": "41e64c1eadd5584d",
     "clarity": 4,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 2,
+    "notes": "Clear and concrete example with specific benefits (reduced errors, faster onboarding). Slightly dense\u2014could break up 'live documentation, CLI tools, and semantic search' for easier scanning. Good signal on why this matters (domain-specific at scale)."
   },
   {
     "item_id": "e01ab182292cd185",
     "clarity": 4,
-    "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "signal": 5,
+    "length_fit": 5,
+    "notes": "Well-structured with concrete metrics (16% faster, 35% higher conversion, 500k users) that prove business impact. 'Conversational' and 'LLMs' are clear in context. Exactly right length at ~55 words."
   },
   {
     "item_id": "02950ab1b940c9dd",
-    "clarity": 4,
+    "clarity": 3,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 2,
+    "notes": "Strong signal (production scale + concrete features), but clarity suffers from dense jargon: 'soft tokens,' 'RAG-adjacent,' 'semantic catalog IDs' need unpacking. Too technical for general audience; better suited for ML engineers. Slightly short of target length."
   },
   {
     "item_id": "7acbb9c8ca0c6171",
     "clarity": 4,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 5,
+    "notes": "Clear and specific with concrete details (Cloudflare, Mythos, multi-stage harness). Strong signal about why this matters (fewer false positives, better exploit chain detection). Right length at ~50 words. Minor: 'agentic harness' could be slightly friendlier, but acceptable for this audience."
   },
   {
     "item_id": "8a7cff3a52759c91",
     "clarity": 4,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 2,
+    "notes": "Clear and concrete with specific examples (CLI, eval datasets, agents). Strong signal about practical value (managing intractable complexity). Just under target length but acceptable given density of information."
   },
   {
     "item_id": "1e0e5b6a31499ee7",
     "clarity": 4,
-    "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "signal": 5,
+    "length_fit": 2,
+    "notes": "Clear and specific with concrete numbers that demonstrate impact. Slightly long (95 words) but the details justify it\u2014readers get why this matters (271 previously-missed bugs) and how it works (static + dynamic analysis). Consider trimming 'including 180 high-severity issues' if stricter length enforcement needed."
   },
   {
     "item_id": "4a5f6edfe5098654",
     "clarity": 4,
-    "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "signal": 3,
+    "length_fit": 2,
+    "notes": "Clear framework with concrete roles, but lacks specific example/outcome. The insight about domain structure mattering more than model sophistication is strong but buried. Slightly under target length (~55 words)."
   },
   {
     "item_id": "e1de02681620e7e7",
     "clarity": 4,
-    "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "signal": 5,
+    "length_fit": 5,
+    "notes": "Excellent specificity (Gandalf, 14 days \u2192 <24 hours) and concrete impact. Clear pipeline explanation. Minor: 'context enrichment' could be slightly clearer, but the example is strong enough that it doesn't hurt readability."
   },
   {
     "item_id": "bd219dfe02ee9bf4",
     "clarity": 4,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 2,
+    "notes": "Clear and concrete (names, scale, integration details), strong signal (enterprise pain point solved), but slightly under ideal length. Could add brief outcome metric (e.g., 'reducing investigation time by X') for stronger impact."
   },
   {
     "item_id": "eb28b53f24e0dc7c",
     "clarity": 4,
-    "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "signal": 5,
+    "length_fit": 2,
+    "notes": "Strong signal (addresses real 10% recycling bottleneck) and clear mechanics. Slightly over target at ~95 words\u2014trim 'wet-lab iteration' phrase and combine final two sentences for punchier delivery."
   },
   {
     "item_id": "fb9263baa71af2b6",
     "clarity": 4,
     "signal": 4,
-    "length_fit": 4,
-    "notes": "(dry-run stub)"
+    "length_fit": 5,
+    "notes": "Clear problem (static benchmarks miss 20% of edge cases) and solution (adaptive systems using telemetry). 'Eval calcification' is jargon but contextualized well. Hits target length at ~65 words. Minor: 'Comet' could be briefly identified as a framework/paper for unfamiliar readers."
   }
 ]
