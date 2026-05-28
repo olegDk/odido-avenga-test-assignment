@@ -12,3 +12,4 @@ venv/
 *.egg-info/
 .claude/
 HANDOFF.md
+PLAN.md

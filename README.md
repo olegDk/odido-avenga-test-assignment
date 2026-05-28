@@ -2,7 +2,7 @@
 
 A small, explicit pipeline that turns the [`zenml/llmops-database`](https://huggingface.co/datasets/zenml/llmops-database) Hugging Face dataset into a weekly Markdown newsletter, summarized and categorized by an LLM, with optional personalization and an LLM-as-judge quality pass.
 
-The full task brief is in [`ASSIGNMENT.md`](ASSIGNMENT.md). Architecture notes for this implementation are in [`PLAN.md`](PLAN.md).
+The full task brief is in [`ASSIGNMENT.md`](ASSIGNMENT.md).
 
 ## Pipeline
 
