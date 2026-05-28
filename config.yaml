@@ -1,0 +1,49 @@
+# Pipeline configuration.
+#
+# When the real Hugging Face dataset arrives, update the `dataset` block
+# (name, split, optional config/revision) and the `fields` mapping so the
+# pipeline knows which columns hold the title, text, url, date, and id.
+
+dataset:
+  # Hugging Face dataset identifier (e.g. "org/name").
+  # Leave as `null` and pass --fixture to run on the mock fixture instead.
+  name: null
+  split: train
+  config: null         # optional dataset config name
+  revision: null       # optional commit/branch pin
+
+fields:
+  # Map pipeline fields → column names in the HF dataset.
+  # `id` is required for dedupe; if the dataset has no stable id,
+  # we hash (url + title) — see ingest.py.
+  id: id
+  title: title
+  text: text           # body / abstract / summary used as LLM input
+  url: url
+  date: date           # ISO 8601 or anything dateutil can parse
+  source: source       # optional, used as a categorization hint
+  score: score         # optional, used as a trending signal
+
+filter:
+  # Items strictly newer than (now - days_back) are considered "this week".
+  days_back: 7
+  # Cap how many items reach the LLM (cost + reading time).
+  max_items: 20
+  # If `score` field present, sort by it desc before truncating.
+  rank_by_score: true
+
+llm:
+  model: claude-haiku-4-5
+  # Cap output tokens per item (summary is meant to be short).
+  max_tokens: 400
+
+newsletter:
+  title: "Odido AI Weekly"
+  sections:
+    - Research Highlights
+    - Industry News
+    - Cool Use Cases
+
+paths:
+  state: data/seen_ids.json
+  output_dir: output

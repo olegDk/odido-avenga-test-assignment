@@ -1,0 +1,56 @@
+[
+  {
+    "id": "mock-001",
+    "title": "Anthropic releases Claude Opus 4.7 with 1M context window",
+    "text": "Anthropic announced Claude Opus 4.7 with a one-million-token context window, enabling long-document analysis, full-codebase reasoning, and multi-hour transcript summarization in a single call. Pricing matches the 200k-context tier. Internal benchmarks show no degradation past 500k tokens, a known weak spot for prior long-context models.",
+    "url": "https://example.com/anthropic-opus-47",
+    "date": "2026-05-26",
+    "source": "Anthropic Blog",
+    "score": 0.94
+  },
+  {
+    "id": "mock-002",
+    "title": "Paper: speculative decoding cuts LLM inference cost by 3x at no quality loss",
+    "text": "A new arXiv paper formalizes draft-and-verify speculative decoding for production LLM serving. Authors report 2.8x to 3.2x throughput gains across Llama and Mistral families with identical output distributions. Reference implementation runs on vLLM.",
+    "url": "https://example.com/spec-decode-paper",
+    "date": "2026-05-25",
+    "source": "arXiv",
+    "score": 0.78
+  },
+  {
+    "id": "mock-003",
+    "title": "T-Mobile deploys LLM-powered call summaries in 1,200 retail stores",
+    "text": "T-Mobile rolled out an AI assistant that drafts post-call summaries for customer-service reps in real time. Average call wrap-up dropped from 4 minutes to 50 seconds. The system runs on Anthropic Claude Haiku with a custom RAG layer over T-Mobile billing knowledge.",
+    "url": "https://example.com/tmobile-ai-summaries",
+    "date": "2026-05-24",
+    "source": "Reuters",
+    "score": 0.88
+  },
+  {
+    "id": "mock-004",
+    "title": "EU AI Act phase 2 enforcement begins June 1",
+    "text": "The European Commission confirmed the second phase of AI Act enforcement starts June 1, 2026, targeting general-purpose AI systems above 10^25 FLOPs and requiring conformity assessments for high-risk deployments. Telecom carriers using AI for fraud detection or churn modeling may fall under the high-risk tier.",
+    "url": "https://example.com/eu-ai-act-phase2",
+    "date": "2026-05-23",
+    "source": "Euractiv",
+    "score": 0.71
+  },
+  {
+    "id": "mock-005",
+    "title": "Open-source agent framework SmolAgents hits 1.0",
+    "text": "Hugging Face shipped SmolAgents 1.0, a 2k-line Python framework for building tool-using LLM agents. Default backends include Anthropic, OpenAI, and any local model served via vLLM. Includes a sandboxed code-execution tool and a built-in tracer for debugging multi-step runs.",
+    "url": "https://example.com/smolagents-10",
+    "date": "2026-05-22",
+    "source": "Hugging Face Blog",
+    "score": 0.65
+  },
+  {
+    "id": "mock-006",
+    "title": "Vodafone Italy uses AI to predict network outages 4 hours in advance",
+    "text": "Vodafone Italy reported its outage-prediction model now flags 87% of customer-impacting outages four hours before they occur, up from a 6-month baseline of 62%. The model ingests cell-tower telemetry, weather, and historical incident data. Avoided downtime is estimated at 1.4 million customer-hours per quarter.",
+    "url": "https://example.com/vodafone-outage-ai",
+    "date": "2026-05-21",
+    "source": "Light Reading",
+    "score": 0.82
+  }
+]
