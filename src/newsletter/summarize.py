@@ -92,7 +92,9 @@ def _system_prompt(sections: list[str], profile: str) -> list[dict]:
         "You receive one news/research/use-case item at a time. For each, you must:\n"
         "  1. Assign it to exactly one of these sections:\n"
         f"{sections_list}\n"
-        f"  2. Write a 2-3 sentence summary {_summary_style(profile)}\n\n"
+        f"  2. Write a summary {_summary_style(profile)}\n\n"
+        "HARD LENGTH LIMIT: 2-3 sentences, 40-70 words total. Do not exceed 70 words.\n"
+        "If you cannot fit it in 70 words, cut detail. Brevity beats completeness here.\n\n"
         "Respond with a single JSON object only, no prose around it:\n"
         '  {"section": "<one of the section names above>", "summary": "<your 2-3 sentences>"}'
     )
