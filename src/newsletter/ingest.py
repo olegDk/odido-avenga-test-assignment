@@ -74,8 +74,9 @@ def _parse_date(value: Any) -> datetime:
         return datetime.fromtimestamp(float(value), tz=timezone.utc)
     s = str(value).strip()
     # Tolerant ISO-ish parse. We avoid the dateutil dependency for now;
-    # if the real dataset uses an exotic format, add it here.
+    # if a new dataset uses an exotic format, add it here.
     for fmt in (
+        "%Y-%m-%dT%H:%M:%S.%fZ",   # zenml/llmops-database: 2024-12-03T13:25:11.000Z
         "%Y-%m-%dT%H:%M:%S%z",
         "%Y-%m-%dT%H:%M:%SZ",
         "%Y-%m-%d",

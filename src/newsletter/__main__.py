@@ -1,4 +1,12 @@
-"""CLI entry point: `python -m newsletter [--fixture PATH] [--dry-run] [--config PATH]`."""
+"""CLI entry point.
+
+Usage:
+  python -m newsletter                                  # real run, config defaults
+  python -m newsletter --dry-run                        # no LLM calls; uses stub summaries
+  python -m newsletter --fixture fixtures/mock.json     # local JSON instead of HF dataset
+  python -m newsletter --profile non-technical          # personalize summary tone
+  python -m newsletter --no-eval                        # skip the LLM-as-judge pass
+"""
 from __future__ import annotations
 
 import argparse
@@ -10,6 +18,7 @@ from dotenv import load_dotenv
 
 from .config import load
 from .pipeline import run
+from .summarize import VALID_PROFILES
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -25,6 +34,16 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Skip LLM calls; emit stub summaries so the pipeline can be tested without an API key",
     )
+    parser.add_argument(
+        "--profile",
+        choices=VALID_PROFILES,
+        help="Reader profile for summary tone (default: from config.personalization.default_profile)",
+    )
+    parser.add_argument(
+        "--no-eval",
+        action="store_true",
+        help="Skip the LLM-as-judge evaluation pass",
+    )
     parser.add_argument("--verbose", "-v", action="store_true")
     args = parser.parse_args(argv)
 
@@ -35,7 +54,13 @@ def main(argv: list[str] | None = None) -> int:
     load_dotenv()
 
     cfg = load(args.config)
-    out_path = run(cfg, fixture=args.fixture, dry_run=args.dry_run)
+    out_path = run(
+        cfg,
+        fixture=args.fixture,
+        dry_run=args.dry_run,
+        profile=args.profile,
+        evaluate=False if args.no_eval else None,
+    )
     print(out_path)
     return 0
 

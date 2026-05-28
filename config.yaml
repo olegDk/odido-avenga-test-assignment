@@ -1,40 +1,37 @@
-# Pipeline configuration.
+# Pipeline configuration for the zenml/llmops-database dataset.
 #
-# When the real Hugging Face dataset arrives, update the `dataset` block
-# (name, split, optional config/revision) and the `fields` mapping so the
-# pipeline knows which columns hold the title, text, url, date, and id.
+# To run against a different dataset, change `dataset.name` and re-map
+# the `fields.*` block to the new column names. The pipeline normalizes
+# everything to its internal Item shape, so nothing else needs editing.
 
 dataset:
-  # Hugging Face dataset identifier (e.g. "org/name").
-  # Leave as `null` and pass --fixture to run on the mock fixture instead.
-  name: null
+  name: zenml/llmops-database
   split: train
-  config: null         # optional dataset config name
-  revision: null       # optional commit/branch pin
+  config: null
+  revision: null
 
 fields:
-  # Map pipeline fields → column names in the HF dataset.
-  # `id` is required for dedupe; if the dataset has no stable id,
-  # we hash (url + title) — see ingest.py.
+  # zenml/llmops-database has no stable id column. We point at "id" anyway;
+  # _normalize falls back to sha256(source_url + title) when the column
+  # is absent, which is stable across runs.
   id: id
   title: title
-  text: text           # body / abstract / summary used as LLM input
-  url: url
-  date: date           # ISO 8601 or anything dateutil can parse
-  source: source       # optional, used as a categorization hint
-  score: score         # optional, used as a trending signal
+  text: short_summary    # pre-summarized by ZenML; safe to feed the LLM
+  url: source_url
+  date: created_at
+  source: industry       # 17 classes; better categorization hint than `company`
+  score: score           # column absent → ignored, filter sorts by date
 
 filter:
-  # Items strictly newer than (now - days_back) are considered "this week".
-  days_back: 7
-  # Cap how many items reach the LLM (cost + reading time).
-  max_items: 20
-  # If `score` field present, sort by it desc before truncating.
-  rank_by_score: true
+  # The dataset is not refreshed weekly, so a wide window keeps demo runs
+  # from producing an empty newsletter. Tighten for a true weekly cadence
+  # on a refreshing data source.
+  days_back: 90
+  max_items: 12
+  rank_by_score: false
 
 llm:
   model: claude-haiku-4-5
-  # Cap output tokens per item (summary is meant to be short).
   max_tokens: 400
 
 newsletter:
@@ -47,3 +44,16 @@ newsletter:
 paths:
   state: data/seen_ids.json
   output_dir: output
+  # The V2 brief asks for a sample newsletter named exactly newsletter.md
+  # at the repo root. The timestamped copies under output_dir stay as history.
+  latest: newsletter.md
+  eval_dir: output
+
+personalization:
+  # Default profile when --profile is not passed on the CLI.
+  default_profile: technical    # one of: technical, non-technical
+
+evaluation:
+  # When enabled, every run runs a second LLM pass scoring each summary.
+  # Disable to skip and save tokens.
+  enabled: true

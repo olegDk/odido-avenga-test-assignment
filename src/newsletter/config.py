@@ -50,6 +50,18 @@ class NewsletterCfg:
 class PathsCfg:
     state: Path
     output_dir: Path
+    latest: Path
+    eval_dir: Path
+
+
+@dataclass(frozen=True)
+class PersonalizationCfg:
+    default_profile: str
+
+
+@dataclass(frozen=True)
+class EvaluationCfg:
+    enabled: bool
 
 
 @dataclass(frozen=True)
@@ -60,6 +72,8 @@ class Config:
     llm: LLMCfg
     newsletter: NewsletterCfg
     paths: PathsCfg
+    personalization: PersonalizationCfg
+    evaluation: EvaluationCfg
 
 
 def load(path: str | Path = "config.yaml") -> Config:
@@ -73,5 +87,9 @@ def load(path: str | Path = "config.yaml") -> Config:
         paths=PathsCfg(
             state=Path(raw["paths"]["state"]),
             output_dir=Path(raw["paths"]["output_dir"]),
+            latest=Path(raw["paths"]["latest"]),
+            eval_dir=Path(raw["paths"]["eval_dir"]),
         ),
+        personalization=PersonalizationCfg(**raw["personalization"]),
+        evaluation=EvaluationCfg(**raw["evaluation"]),
     )
