@@ -51,6 +51,9 @@ def main(argv: list[str] | None = None) -> int:
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s %(name)s: %(message)s",
     )
+    # Silence noisy third-party HTTP libraries so -v stays useful for our own modules.
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
     load_dotenv()
 
     cfg = load(args.config)
