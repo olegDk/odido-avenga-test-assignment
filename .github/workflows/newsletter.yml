@@ -44,6 +44,7 @@ jobs:
             $([ "${{ github.event.inputs.dry_run }}" = "true" ] && echo "--dry-run")
 
       - name: Commit newsletter + state
+        if: github.event.inputs.dry_run != 'true'
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
