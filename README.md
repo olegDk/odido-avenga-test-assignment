@@ -30,38 +30,39 @@ Each stage lives in its own module under `src/newsletter/`. The stages pass plai
 
 ## Run locally
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env    # then put your ANTHROPIC_API_KEY in .env
-```
-
-Smoke-test the pipeline without spending any tokens, using the bundled fixture:
+The fastest path uses the `Makefile`. `make help` lists every target.
 
 ```bash
-PYTHONPATH=src python -m newsletter --fixture fixtures/mock_items.json --dry-run
+make install                            # create .venv and pip install
+cp .env.example .env                    # then put your ANTHROPIC_API_KEY in .env
 ```
 
-Real run against the configured Hugging Face dataset:
-
-```bash
-PYTHONPATH=src python -m newsletter
-```
+| Command | What it does | API key? |
+|---|---|---|
+| `make dry-run`  | Smoke-test against `fixtures/mock_items.json`; no LLM calls | no |
+| `make dry-real` | Pull the real HF dataset, run stub summaries; verifies field mapping | no |
+| `make run`      | Full real run: HF dataset + LLM summarize + LLM judge eval (technical profile) | **yes** |
+| `make run-nt`   | Same as `make run` but with the non-technical reader profile | **yes** |
+| `make reset`    | Clear `data/seen_ids.json` so the next run starts fresh | no |
+| `make clean`    | Wipe `newsletter.md`, `output/`, and reset state | no |
+| `make help`     | List all targets with their docs | no |
 
 The latest newsletter is always at [`newsletter.md`](newsletter.md). Timestamped copies under `output/newsletter-YYYY-MM-DD.md` keep history. Already-seen item ids land in `data/seen_ids.json` so the next run skips them.
 
-### CLI flags
+### Direct CLI (for flag combinations Make doesn't cover)
 
+```bash
+PYTHONPATH=src .venv/bin/python -m newsletter [flags]
 ```
---config PATH         Path to config.yaml (default: ./config.yaml)
---fixture PATH        Use a local JSON fixture instead of the configured HF dataset
---dry-run             Skip LLM calls; emit stub summaries + flat eval scores
---profile {technical, non-technical}
-                      Reader profile for summary tone (default from config)
---no-eval             Skip the LLM-as-judge evaluation pass
---verbose / -v        Debug logging
-```
+
+| Flag | Effect |
+|---|---|
+| `--config PATH` | Path to config.yaml (default: `./config.yaml`) |
+| `--fixture PATH` | Use a local JSON fixture instead of the configured HF dataset |
+| `--dry-run` | Skip LLM calls; emit stub summaries + flat eval scores |
+| `--profile {technical, non-technical}` | Reader profile for summary tone (default from config) |
+| `--no-eval` | Skip the LLM-as-judge evaluation pass |
+| `--verbose` / `-v` | Debug logging |
 
 ## Configuration
 
@@ -80,7 +81,7 @@ Everything that might change between runs lives in `config.yaml`:
 
 [`newsletter.md`](newsletter.md) at the repo root is the latest sample. It was generated from the real `zenml/llmops-database` dataset using `--dry-run` mode (stub summaries — round-robin section assignment, raw text truncated at 200 chars). A real run produces tighter, LLM-written summaries and meaningful LLM-judged quality scores in the footer.
 
-To regenerate with real LLM calls, set `ANTHROPIC_API_KEY` and run `python -m newsletter` without `--dry-run`.
+To regenerate with real LLM calls, drop your `ANTHROPIC_API_KEY` into `.env` and run `make run` (or `make run-nt` for the non-technical edition).
 
 ## Bonuses
 
