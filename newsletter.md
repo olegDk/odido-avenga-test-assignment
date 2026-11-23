@@ -1,4 +1,4 @@
-# Odido AI Weekly — Week 47, 2026
+# Odido AI Weekly — Week 48, 2026
 
 _Edition for technical readers._
 
